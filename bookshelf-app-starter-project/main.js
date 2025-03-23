@@ -24,13 +24,13 @@ function generateId() {
   return +new Date();
 }
 
-function generateBookObject(id, title, author, year, isCompleted) {
+function generateBookObject(id, title, author, year, isComplete) {
   return {
     id,
     title,
     author,
     year,
-    isCompleted,
+    isComplete,
   };
 }
 
@@ -70,7 +70,7 @@ function addBook() {
   const title = document.getElementById("bookFormTitle").value;
   const author = document.getElementById("bookFormAuthor").value;
   const year = Number(document.getElementById("bookFormYear").value);
-  const isCompleted = document.getElementById("bookFormIsComplete").checked;
+  const isComplete = document.getElementById("bookFormIsComplete").checked;
 
   const generatedID = generateId();
   const bookObject = generateBookObject(
@@ -78,7 +78,7 @@ function addBook() {
     title,
     author,
     year,
-    isCompleted
+    isComplete
   );
   books.push(bookObject);
 
@@ -95,7 +95,7 @@ document.addEventListener(RENDER_EVENT, function () {
 
   for (const bookItem of books) {
     const bookElement = makeBook(bookItem);
-    if (bookItem.isCompleted) {
+    if (bookItem.isComplete) {
       completedBookList.append(bookElement);
     } else {
       uncompletedBookList.append(bookElement);
@@ -125,7 +125,7 @@ function makeBook(bookObject) {
   const completeButton = document.createElement("button");
   completeButton.setAttribute("data-testid", "bookItemIsCompleteButton");
 
-  if (bookObject.isCompleted) {
+  if (bookObject.isComplete) {
     completeButton.innerText = "Belum Selesai";
   } else {
     completeButton.innerText = "Selesai Dibaca";
@@ -153,7 +153,7 @@ function completeBookStatus(bookId) {
 
   if (!bookTarget) return;
 
-  bookTarget.isCompleted = !bookTarget.isCompleted;
+  bookTarget.isComplete = !bookTarget.isComplete;
   document.dispatchEvent(new Event(RENDER_EVENT));
   saveData();
 }
@@ -186,7 +186,7 @@ function searchBook() {
   for (const bookItem of books) {
     if (bookItem.title.toLowerCase().includes(searchTitle)) {
       const bookElement = makeBook(bookItem);
-      if (bookItem.isCompleted) {
+      if (bookItem.isComplete) {
         completedBookList.append(bookElement);
       } else {
         uncompletedBookList.append(bookElement);

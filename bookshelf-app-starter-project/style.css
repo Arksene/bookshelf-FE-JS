@@ -123,6 +123,7 @@ button:hover {
   margin-right: 5px;
 }
 
+/* Responsiveness */
 @media (max-width: 768px) {
   [data-testid="bookItem"] {
     width: 100%;
